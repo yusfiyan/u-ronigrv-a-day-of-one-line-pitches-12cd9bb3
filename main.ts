@@ -18,6 +18,19 @@ if (LINE.length < 1 || LINE.length > 240) {
   process.exit(1);
 }
 
+// The entry must be exactly one sentence: a single sentence-terminating
+// character (., ! or ?) at the very end and no other sentence boundary
+// inside. A terminator only counts as a boundary when it is followed by
+// whitespace or the end of the line, so the dot inside "make.fun" does
+// not count as one.
+const sentenceEnds = LINE.match(/[.!?](?=\s|$)/g) ?? [];
+if (sentenceEnds.length !== 1 || !/[.!?]$/.test(LINE)) {
+  console.error(
+    "entry line must be exactly one sentence: one terminator (., ! or ?) at the end, none inside",
+  );
+  process.exit(1);
+}
+
 mkdirSync(OUTPUT_DIR, { recursive: true });
 writeFileSync(join(OUTPUT_DIR, "entry.txt"), LINE);
 
