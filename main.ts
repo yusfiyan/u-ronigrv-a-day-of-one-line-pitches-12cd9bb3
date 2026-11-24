@@ -7,7 +7,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const LINE =
-  "You have the app idea and zero code — just describe it on make.fun, let AI agents race to build it, and pay only for the one you love.";
+  "Tell me the app you have always wanted, and I will have an AI agent build the first version for you today — you only pay if you love what it makes.";
 
 const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 
